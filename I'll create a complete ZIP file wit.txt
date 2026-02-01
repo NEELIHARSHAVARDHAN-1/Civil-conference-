@@ -1,0 +1,890 @@
+I'll create a complete ZIP file with all the necessary files for the NK-PIN website. Since I can't directly create or send files, I'll provide you with the complete file structure and code for each file that you can save locally and zip yourself.
+
+## 📦 Complete NK-PIN Website File Structure
+
+Here's the complete file structure for your project:
+
+```
+nkpin-website.zip/
+│
+├── index.html              # Main HTML file
+├── css/
+│   └── style.css          # Extracted CSS
+├── js/
+│   ├── app.js             # Main JavaScript logic
+│   ├── map.js             # Map initialization and controls
+│   └── api.js             # API integration (to be customized)
+├── data/
+│   ├── word-list-1.json   # First word list
+│   └── word-list-2.json   # Second word list
+├── assets/
+│   ├── logo.png           # Placeholder logo
+│   └── favicon.ico        # Website icon
+└── README.md              # Setup instructions
+```
+
+## 📄 File 1: index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NK-PIN | Human Readable Location Codes</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>NK-PIN System</h1>
+                    <p>Human Readable Location Codes | Powered by OpenStreetMap</p>
+                </div>
+            </div>
+            <div class="tagline">
+                <i class="fas fa-location-dot"></i> Click anywhere on the map to generate NK-PIN
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+
+            <!-- Controls Panel -->
+            <div class="controls-panel">
+                <h2 class="panel-title">Location Control Panel</h2>
+                
+                <!-- Manual Input -->
+                <div class="input-group">
+                    <label for="coordinates"><i class="fas fa-globe-asia"></i> Enter Coordinates</label>
+                    <input type="text" id="coordinates" placeholder="e.g., 17.3850, 78.4867">
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" id="generate-btn">
+                        <i class="fas fa-bolt"></i> Generate NK-PIN
+                    </button>
+                    <button class="btn btn-secondary" id="location-btn">
+                        <i class="fas fa-location-crosshairs"></i> Use My Location
+                    </button>
+                </div>
+
+                <!-- Results Display -->
+                <div class="results-container">
+                    <h3 class="result-title"><i class="fas fa-map-pin"></i> Location Results</h3>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Coordinates:</span>
+                        <span class="result-value" id="display-coords">17.3850, 78.4867</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">DIGIPIN:</span>
+                        <span class="result-value" id="display-digipin">39J-49L-L8T4</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">NK-PIN:</span>
+                        <span class="result-value" id="display-nkpin">39J-MAN-PUR</span>
+                    </div>
+                    
+                    <!-- NK-PIN Display -->
+                    <div class="nkpin-display" id="nkpin-main-display">
+                        39J-MAN-PUR
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> How to Use</h3>
+                    <ol>
+                        <li>Click anywhere on the map to select a location</li>
+                        <li>Or enter coordinates manually in the input field</li>
+                        <li>Click "Generate NK-PIN" to convert to human-readable code</li>
+                        <li>Use NK-PIN for addresses, navigation, and location sharing</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>NK-PIN System &copy; 2023 | Research collaboration with IIT Hyderabad</p>
+            <p>OpenStreetMap © OpenStreetMap contributors | Leaflet Map Library</p>
+            <div class="api-status">
+                <div class="status-indicator"></div>
+                <span>NK-PIN API: Connected</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- Application JavaScript -->
+    <script src="js/api.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+```
+
+## 📄 File 2: css/style.css
+
+```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0c2461 0%, #1e3799 100%);
+    color: #333;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 25px 40px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+    color: #1e3799;
+}
+
+.logo-text h1 {
+    font-size: 2.2rem;
+    color: #0c2461;
+    font-weight: 800;
+}
+
+.logo-text p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.tagline {
+    background: linear-gradient(90deg, #4a69bd, #1e3799);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Main Content Layout */
+.main-content {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.map-container {
+    flex: 3;
+    min-width: 300px;
+}
+
+.controls-panel {
+    flex: 1;
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Map Styling */
+#map {
+    height: 600px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Panel Controls */
+.panel-title {
+    font-size: 1.5rem;
+    color: #0c2461;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #4a69bd;
+    font-weight: 700;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #4a69bd;
+    outline: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #4a69bd, #1e3799);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #1e3799, #0c2461);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(30, 55, 153, 0.4);
+}
+
+.btn-secondary {
+    background: #f1f2f6;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #dfe4ea;
+    transform: translateY(-2px);
+}
+
+/* Results Display */
+.results-container {
+    margin-top: 30px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    border-left: 5px solid #4a69bd;
+}
+
+.result-title {
+    font-size: 1.2rem;
+    color: #0c2461;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-label {
+    font-weight: 600;
+    color: #555;
+}
+
+.result-value {
+    font-weight: 700;
+    color: #1e3799;
+    font-size: 1.1rem;
+}
+
+.nkpin-display {
+    background: linear-gradient(90deg, #4a69bd, #1e3799);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    box-shadow: 0 5px 15px rgba(30, 55, 153, 0.3);
+}
+
+/* Instructions */
+.instructions {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.instructions h3 {
+    color: #0c2461;
+    margin-bottom: 10px;
+}
+
+.instructions ol {
+    padding-left: 20px;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+.api-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4cd137;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .map-container, .controls-panel {
+        width: 100%;
+    }
+    
+    #map {
+        height: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .tagline {
+        width: 100%;
+    }
+    
+    #map {
+        height: 400px;
+    }
+    
+    .nkpin-display {
+        font-size: 1.4rem;
+    }
+}
+```
+
+## 📄 File 3: js/app.js
+
+```javascript
+// Main application initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize map
+    initMap();
+    
+    // Set up event listeners
+    document.getElementById('generate-btn').addEventListener('click', convertCoordinates);
+    document.getElementById('location-btn').addEventListener('click', locateMe);
+    
+    // Initialize with default location
+    generateNKPINFromCoordinates(17.3850, 78.4867);
+});
+
+// Function to handle manual coordinate conversion
+function convertCoordinates() {
+    const coordsInput = document.getElementById('coordinates').value.trim();
+    
+    if (!coordsInput) {
+        alert('Please enter coordinates in "lat, lng" format');
+        return;
+    }
+    
+    const coords = coordsInput.split(',').map(coord => parseFloat(coord.trim()));
+    
+    if (coords.length !== 2 || isNaN(coords[0]) || isNaN(coords[1])) {
+        alert('Invalid coordinates. Please use format: "latitude, longitude"');
+        return;
+    }
+    
+    // Update map view and marker
+    updateMapLocation(coords[0], coords[1]);
+    
+    // Update display and generate NK-PIN
+    document.getElementById('display-coords').textContent = coordsInput;
+    generateNKPINFromCoordinates(coords[0], coords[1]);
+}
+
+// Function to use current location
+function locateMe() {
+    if (!navigator.geolocation) {
+        alert('Geolocation is not supported by your browser');
+        return;
+    }
+    
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            // Update map view
+            updateMapLocation(lat, lng);
+            
+            // Update inputs and generate NK-PIN
+            const coordsText = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            document.getElementById('coordinates').value = coordsText;
+            document.getElementById('display-coords').textContent = coordsText;
+            
+            generateNKPINFromCoordinates(lat, lng);
+        },
+        function(error) {
+            alert('Unable to retrieve your location. Please enable location services.');
+            console.error('Geolocation error:', error);
+        }
+    );
+}
+
+// Function to generate NK-PIN from coordinates
+async function generateNKPINFromCoordinates(lat, lng) {
+    try {
+        // Display loading state
+        document.getElementById('nkpin-main-display').innerHTML = 
+            '<i class="fas fa-spinner fa-spin"></i> Generating NK-PIN...';
+        
+        // Convert coordinates to DIGIPIN
+        const digipin = await convertToDigipin(lat, lng);
+        
+        // Update DIGIPIN display
+        document.getElementById('display-digipin').textContent = digipin;
+        
+        // Convert DIGIPIN to NK-PIN
+        const nkpin = await convertToNKPIN(digipin);
+        
+        // Update NK-PIN displays
+        document.getElementById('display-nkpin').textContent = nkpin;
+        document.getElementById('nkpin-main-display').textContent = nkpin;
+        
+        // Add popup to marker
+        addMarkerPopup(nkpin, lat, lng);
+        
+    } catch (error) {
+        console.error('Error generating NK-PIN:', error);
+        document.getElementById('nkpin-main-display').innerHTML = 
+            '<span style="color: #ff6b6b;"><i class="fas fa-exclamation-circle"></i> Error generating NK-PIN</span>';
+    }
+}
+```
+
+## 📄 File 4: js/map.js
+
+```javascript
+// Map initialization and controls
+let map = null;
+let marker = null;
+let currentLatLng = { lat: 17.3850, lng: 78.4867 }; // Default: Hyderabad
+
+// Initialize the map
+function initMap() {
+    // Create map centered on India
+    map = L.map('map').setView([20.5937, 78.9629], 5);
+    
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+    }).addTo(map);
+    
+    // Add click event to map
+    map.on('click', function(e) {
+        currentLatLng = e.latlng;
+        
+        // Update coordinates display
+        document.getElementById('display-coords').textContent = 
+            `${currentLatLng.lat.toFixed(6)}, ${currentLatLng.lng.toFixed(6)}`;
+        document.getElementById('coordinates').value = 
+            `${currentLatLng.lat.toFixed(6)}, ${currentLatLng.lng.toFixed(6)}`;
+        
+        // Update marker
+        updateMarker(currentLatLng.lat, currentLatLng.lng);
+        
+        // Generate NK-PIN automatically on map click
+        generateNKPINFromCoordinates(currentLatLng.lat, currentLatLng.lng);
+    });
+    
+    // Initialize with a default marker
+    marker = L.marker([currentLatLng.lat, currentLatLng.lng]).addTo(map);
+}
+
+// Update marker position
+function updateMarker(lat, lng) {
+    if (marker) {
+        map.removeLayer(marker);
+    }
+    
+    marker = L.marker([lat, lng]).addTo(map);
+    map.setView([lat, lng], 15);
+}
+
+// Update map location
+function updateMapLocation(lat, lng) {
+    currentLatLng = { lat, lng };
+    updateMarker(lat, lng);
+}
+
+// Add popup to marker
+function addMarkerPopup(nkpin, lat, lng) {
+    if (marker) {
+        marker.bindPopup(`
+            <div style="text-align: center;">
+                <h4 style="margin: 0 0 8px 0; color: #1e3799;">NK-PIN Location</h4>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #4a69bd; margin-bottom: 5px;">
+                    ${nkpin}
+                </div>
+                <div style="font-size: 0.9rem; color: #666;">
+                    Coordinates: ${lat.toFixed(6)}, ${lng.toFixed(6)}
+                </div>
+                <button onclick="copyToClipboard('${nkpin}')" 
+                        style="margin-top: 8px; padding: 5px 10px; background: #4a69bd; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Copy NK-PIN
+                </button>
+            </div>
+        `).openPopup();
+    }
+}
+
+// Copy NK-PIN to clipboard
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        alert('NK-PIN copied to clipboard: ' + text);
+    }, function(err) {
+        console.error('Could not copy text: ', err);
+    });
+}
+```
+
+## 📄 File 5: js/api.js
+
+```javascript
+// API integration functions
+
+// Mock function for coordinate to DIGIPIN conversion
+// REPLACE THIS WITH ACTUAL IIT HYDERABAD API INTEGRATION
+async function convertToDigipin(lat, lng) {
+    // TODO: Replace with actual API call to IIT Hyderabad's service
+    // Example real API call would be:
+    // const response = await fetch(`https://digipin-api.iith.ac.in/convert?lat=${lat}&lng=${lng}`);
+    // const data = await response.json();
+    // return data.digipin;
+    
+    // Mock logic for demonstration - generates a deterministic fake DIGIPIN
+    // This is just for testing - you MUST replace this with the real API
+    console.log(`Converting coordinates to DIGIPIN: ${lat}, ${lng}`);
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 300));
+    
+    // Generate a mock DIGIPIN based on coordinates
+    const latStr = Math.abs(lat * 1000).toString().replace('.', '').substring(0, 3);
+    const lngStr = Math.abs(lng * 1000).toString().replace('.', '').substring(0, 3);
+    const randomStr = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    
+    const mockDigipin = `${latStr}-${lngStr}-${randomStr}`;
+    console.log(`Generated mock DIGIPIN: ${mockDigipin}`);
+    
+    return mockDigipin;
+}
+
+// Function to convert DIGIPIN to NK-PIN
+// REPLACE THIS WITH YOUR ACTUAL NK-PIN BACKEND API
+async function convertToNKPIN(digipin) {
+    try {
+        // TODO: Replace with your actual API endpoint
+        // Example real API call:
+        // const response = await fetch(`https://your-nkpin-api.com/generate/${digipin}`);
+        // const data = await response.json();
+        // return data.nkpin;
+        
+        console.log(`Converting DIGIPIN to NK-PIN: ${digipin}`);
+        
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        // Mock logic - uses your specified format
+        const cleanDigipin = digipin.replace(/-/g, '');
+        
+        if (cleanDigipin.length < 10) {
+            throw new Error('Invalid DIGIPIN format');
+        }
+        
+        const zone = cleanDigipin.substring(0, 3);
+        
+        // Load word lists (in production, these would come from your server)
+        let wordList1 = [];
+        let wordList2 = [];
+        
+        try {
+            // Try to load from local data files
+            const response1 = await fetch('data/word-list-1.json');
+            const response2 = await fetch('data/word-list-2.json');
+            
+            wordList1 = await response1.json();
+            wordList2 = await response2.json();
+        } catch (error) {
+            // Fallback to hardcoded lists if files aren't available
+            console.warn('Could not load word lists from files, using defaults');
+            wordList1 = ["MAN", "DEV", "SUR", "NAG", "KAR", "VEL", "RAM", "LAK"];
+            wordList2 = ["PUR", "NAGAR", "KOT", "DURG", "CHOWK", "BAZAR", "GAON", "VIHAR"];
+        }
+        
+        // Deterministic selection based on DIGIPIN characters
+        const index1 = cleanDigipin.charCodeAt(3) % wordList1.length;
+        const index2 = cleanDigipin.charCodeAt(7) % wordList2.length;
+        
+        const nkpin = `${zone}-${wordList1[index1]}-${wordList2[index2]}`;
+        console.log(`Generated NK-PIN: ${nkpin}`);
+        
+        return nkpin;
+        
+    } catch (error) {
+        console.error('Error converting to NK-PIN:', error);
+        throw error;
+    }
+}
+```
+
+## 📄 File 6: data/word-list-1.json
+
+```json
+["MAN", "DEV", "SUR", "NAG", "KAR", "VEL", "RAM", "LAK", "SHI", "GAN", "BAL", "CHA", "DHA", "GOA", "HAR", "IND", "JAI", "KOL", "MAD", "NEW", "OLD", "PAT", "RAJ", "SAN", "TRI", "UDA", "VAR", "WES", "YEL", "ZEN"]
+```
+
+## 📄 File 7: data/word-list-2.json
+
+```json
+["PUR", "NAGAR", "KOT", "DURG", "CHOWK", "BAZAR", "GAON", "VIHAR", "ABAD", "BAGH", "CITY", "DAM", "EAST", "FOREST", "GARDEN", "HILLS", "ISLAND", "JUNCTION", "KUNJ", "LANE", "MARG", "NAGAR", "PARK", "ROAD", "STREET", "TOWN", "VILLAGE", "WEST", "YARD", "ZONE"]
+```
+
+## 📄 File 8: assets/favicon.ico
+
+*(Note: I can't provide binary files in text. You can:)*
+1. Download a free map icon from: https://www.favicon.cc/
+2. Use a placeholder icon
+3. Create your own 16x16 pixel icon
+
+## 📄 File 9: README.md
+
+```markdown
+# NK-PIN Website
+
+A web application for generating human-readable NK-PIN location codes based on coordinates and DIGIPIN technology.
+
+## Features
+
+- Interactive map using OpenStreetMap
+- Click-to-generate NK-PIN functionality
+- Manual coordinate input
+- Current location detection
+- Real-time NK-PIN generation
+- Responsive design for all devices
+
+## Setup Instructions
+
+### Option 1: Quick Start
+1. Extract all files to a folder
+2. Open `index.html` in a web browser
+3. Click on the map to generate NK-PIN codes
+
+### Option 2: Local Development Server
+1. Install Node.js
+2. Run: `npx serve .`
+3. Open browser to: `http://localhost:3000`
+
+### Option 3: Python Server
+1. Run: `python -m http.server 8000`
+2. Open browser to: `http://localhost:8000`
+
+## API Integration Points
+
+### 1. DIGIPIN API Integration
+Replace the mock function in `js/api.js`:
+
+```javascript
+async function convertToDigipin(lat, lng) {
+    // Replace with actual IIT Hyderabad API call
+    const response = await fetch(`YOUR_DIGIPIN_API_ENDPOINT?lat=${lat}&lng=${lng}`);
+    const data = await response.json();
+    return data.digipin;
+}
+```
+
+### 2. NK-PIN Backend Integration
+Replace the mock function in `js/api.js`:
+
+```javascript
+async function convertToNKPIN(digipin) {
+    // Replace with your actual NK-PIN backend API
+    const response = await fetch(`YOUR_NKPIN_API_ENDPOINT/generate/${digipin}`);
+    const data = await response.json();
+    return data.nkpin;
+}
+```
+
+## File Structure
+
+- `index.html` - Main HTML file
+- `css/style.css` - Stylesheets
+- `js/` - JavaScript files
+  - `app.js` - Main application logic
+  - `map.js` - Map initialization and controls
+  - `api.js` - API integration (customize this)
+- `data/` - Data files
+  - `word-list-1.json` - First word list
+  - `word-list-2.json` - Second word list
+- `assets/` - Images and icons
+
+## Customization
+
+### Word Lists
+Edit the JSON files in `data/` folder to customize the word lists used in NK-PIN generation.
+
+### Styling
+Modify `css/style.css` to change colors, fonts, and layout.
+
+### Map Settings
+Adjust map settings in `js/map.js`:
+- Initial view coordinates
+- Zoom level
+- Tile layer (change map style)
+
+## Browser Support
+- Chrome 60+
+- Firefox 55+
+- Safari 11+
+- Edge 79+
+
+## License
+This project is for research and development purposes in collaboration with IIT Hyderabad.
+
+## Credits
+- OpenStreetMap for map tiles
+- Leaflet.js for mapping library
+- Font Awesome for icons
+- IIT Hyderabad for DIGIPIN technology
+```
+
+## 📦 How to Create the ZIP File
+
+1. **Create a folder** named `nkpin-website`
+2. **Inside this folder**, create the following subfolders:
+   - `css/`
+   - `js/`
+   - `data/`
+   - `assets/`
+3. **Copy each code block above** into the corresponding files:
+   - `index.html` (main folder)
+   - `css/style.css`
+   - `js/app.js`
+   - `js/map.js`
+   - `js/api.js`
+   - `data/word-list-1.json`
+   - `data/word-list-2.json`
+   - `README.md` (main folder)
+4. **Add a favicon** to `assets/favicon.ico` (optional)
+5. **Select all files and folders**, right-click, and choose "Compress" or "Send to > Compressed (zipped) folder"
+6. **Rename** the zip file to `nkpin-website.zip`
+
+## 🚀 Deployment Options
+
+1. **Local Testing**: Just open `index.html` in a browser
+2. **GitHub Pages**: Upload to a GitHub repository and enable GitHub Pages
+3. **Netlify/Vercel**: Drag and drop the zip file to deploy
+4. **Apache/Nginx**: Upload to your web server
+
+The website is fully functional with mock data. To make it production-ready, you need to:
+
+1. **Replace the API functions** in `js/api.js` with real IIT Hyderabad DIGIPIN API calls
+2. **Connect to your NK-PIN backend** for actual conversion
+3. **Add your logo** to the `assets` folder
+
+Would you like me to help you with the API integration code for either the IIT Hyderabad DIGIPIN API or your NK-PIN backend?

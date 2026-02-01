@@ -47,7 +47,7 @@
     letter-spacing: 2px;
     position: relative;
     display: inline-block;
-    background: linear-gradient(135deg, #243658 0%, #BE2633 100%);
+    background: linear-gradient(135deg, #243658 0%, #0d9488 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -62,7 +62,7 @@
     transform: translateX(-50%);
     width: 100px;
     height: 4px;
-    background: linear-gradient(135deg, #BE2633, #243658);
+    background: linear-gradient(135deg, #0d9488, #243658);
     border-radius: 2px;
     box-shadow: 0 4px 15px rgba(190, 38, 51, 0.3);
 }
@@ -100,7 +100,7 @@
 }
 
 .section-header h3 i {
-    color: #BE2633;
+    color: #0d9488;
     font-size: 1.2em;
 }
 
@@ -149,7 +149,7 @@
 }
 
 .form-group label i {
-    color: #BE2633;
+    color: #0d9488;
     font-size: 1.1em;
 }
 
@@ -171,7 +171,7 @@
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    border-color: #BE2633;
+    border-color: #0d9488;
     outline: none;
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 0 0 3px rgba(190, 38, 51, 0.1);
@@ -184,7 +184,7 @@
 }
 
 .submit-btn {
-    background: linear-gradient(135deg, #BE2633, #243658);
+    background: linear-gradient(135deg, #0d9488, #243658);
     color: white;
     padding: 18px 40px;
     border: none;
@@ -202,7 +202,7 @@
 }
 
 .submit-btn:hover {
-    background: linear-gradient(135deg, #243658, #BE2633);
+    background: linear-gradient(135deg, #243658, #0d9488);
     transform: translateY(-3px);
     box-shadow: 0 12px 25px rgba(190, 38, 51, 0.4);
 }
@@ -231,7 +231,7 @@
     margin-bottom: 20px;
     background: rgba(255, 255, 255, 0.7);
     border-radius: 15px;
-    border-left: 5px solid #BE2633;
+    border-left: 5px solid #0d9488;
     transition: all 0.3s ease;
 }
 
@@ -244,7 +244,7 @@
 .method-icon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #BE2633, #243658);
+    background: linear-gradient(135deg, #0d9488, #243658);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -272,7 +272,7 @@
 }
 
 .method-content a {
-    color: #BE2633;
+    color: #0d9488;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
@@ -299,7 +299,7 @@
 }
 
 .quick-actions h4 i {
-    color: #BE2633;
+    color: #0d9488;
 }
 
 .action-buttons {
@@ -326,7 +326,7 @@
 
 .action-btn i {
     font-size: 1.5rem;
-    color: #BE2633;
+    color: #0d9488;
 }
 
 .action-btn:hover {
@@ -368,7 +368,7 @@
 }
 
 .transport-info h4 i {
-    color: #BE2633;
+    color: #0d9488;
 }
 
 .transport-methods {
@@ -384,11 +384,11 @@
     padding: 15px;
     background: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
-    border-left: 4px solid #BE2633;
+    border-left: 4px solid #0d9488;
 }
 
 .transport-item i {
-    color: #BE2633;
+    color: #0d9488;
     font-size: 1.5rem;
     width: 24px;
     text-align: center;
