@@ -1260,3 +1260,10 @@ footer {
     font-size: 13px;
     color: #666;
 }
+.icsigt-images img {
+  width: 100%;
+  max-width: 900px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 10px;
+}
