@@ -2,953 +2,301 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration - ICSIGT 2026</title>
-
-    <!-- Google Font -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        body{
-            font-family:'Inter',sans-serif;
-            background:#f5f6fb;
-            color:#222;
-        }
-
-        a{
-            text-decoration:none;
-        }
-
-        img{
-            max-width:100%;
-        }
-
-        /* ========================================
-                        HEADER
-        ======================================== */
-
-        .logo-header{
-            width:100%;
-            background:#ffffff;
-            box-shadow:0 2px 10px rgba(0,0,0,0.05);
-            position:sticky;
-            top:0;
-            z-index:1000;
-        }
-
-        .logo-container{
-            max-width:1400px;
-            margin:auto;
-            padding:18px 30px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        }
-
-        .header-logo{
-            width:60px;
-        }
-
-        .logo-text h1{
-            font-size:24px;
-            font-weight:800;
-            color:#0d1b4c;
-        }
-
-        .conference-cross{
-            color:#2d6bff;
-        }
-
-        .header-nav ul{
-            display:flex;
-            gap:35px;
-            list-style:none;
-            align-items:center;
-        }
-
-        .header-nav a{
-            color:#1d1d1d;
-            font-size:14px;
-            font-weight:700;
-        }
-
-        .header-nav a.active{
-            background:#2d6bff;
-            color:#fff;
-            padding:12px 22px;
-            border-radius:30px;
-        }
-
-        /* ========================================
-                        HERO
-        ======================================== */
-
-        .hero{
-            padding:70px 20px 40px;
-            text-align:center;
-            background:linear-gradient(
-                to bottom,
-                #f7f8fd,
-                #f3f4f9
-            );
-        }
-
-        .hero-logo{
-            width:120px;
-            margin-bottom:25px;
-        }
-
-        .hero-title{
-            max-width:1000px;
-            margin:auto;
-            font-size:42px;
-            line-height:1.4;
-            font-weight:800;
-            color:#0d1b4c;
-        }
-
-        .hero-count{
-            color:#2d6bff;
-        }
-
-        .hero h4{
-            margin-top:18px;
-            font-size:30px;
-        }
-
-        .highlight{
-            color:#2d6bff;
-        }
-
-        .hero p{
-            margin-top:15px;
-            font-size:18px;
-            color:#666;
-        }
-
-        /* ========================================
-                    MAIN CONTAINER
-        ======================================== */
-
-        .container{
-            max-width:1200px;
-            margin:auto;
-            padding:40px 20px 80px;
-        }
-
-        .section-title{
-            text-align:center;
-            font-size:42px;
-            font-weight:800;
-            color:#13244d;
-            margin-bottom:10px;
-        }
-
-        .section-subtitle{
-            text-align:center;
-            color:#666;
-            margin-bottom:40px;
-            font-size:17px;
-        }
-
-        /* ========================================
-                        CARDS
-        ======================================== */
-
-        .card{
-            background:#ffffff;
-            border-radius:22px;
-            overflow:hidden;
-            margin-bottom:40px;
-            box-shadow:0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .card-head{
-            background:#2d6bff;
-            color:#fff;
-            text-align:center;
-            padding:20px;
-            font-size:24px;
-            font-weight:700;
-        }
-
-        .table-wrap{
-            overflow-x:auto;
-        }
-
-        table{
-            width:100%;
-            border-collapse:collapse;
-        }
-
-        table th{
-            background:#edf2ff;
-            color:#13244d;
-            font-size:15px;
-            padding:16px;
-            border:1px solid #dde5ff;
-        }
-
-        table td{
-            padding:16px;
-            border:1px solid #ececec;
-            text-align:center;
-            font-size:15px;
-        }
-
-        tbody tr:nth-child(even){
-            background:#fafcff;
-        }
-
-        /* ========================================
-                    PAYMENT SECTION
-        ======================================== */
-
-        .block-title{
-            text-align:center;
-            font-size:34px;
-            font-weight:800;
-            color:#13244d;
-            margin-bottom:35px;
-        }
-
-        .pay-card{
-            background:#ffffff;
-            border-radius:22px;
-            padding:40px;
-            box-shadow:0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .pay-head{
-            text-align:center;
-            color:#2d6bff;
-            font-size:28px;
-            font-weight:800;
-            margin-bottom:30px;
-        }
-
-        .kv-table th{
-            width:35%;
-            text-align:left;
-        }
-
-        .kv-table td{
-            text-align:left;
-        }
-
-        /* ========================================
-                        QR
-        ======================================== */
-
-        .scan-pay{
-            margin-top:45px;
-            text-align:center;
-        }
-
-        .scan-title{
-            font-size:28px;
-            font-weight:700;
-            color:#13244d;
-            margin-bottom:20px;
-        }
-
-        .qr-image{
-            width:240px;
-            background:#fff;
-            padding:15px;
-            border-radius:18px;
-            box-shadow:0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .upi-meta{
-            margin-top:20px;
-        }
-
-        .upi-meta p{
-            margin:10px 0;
-            font-size:16px;
-        }
-
-        .pay-note{
-            color:#666;
-        }
-
-        /* ========================================
-                REGISTRATION BUTTON
-        ======================================== */
-
-        .reg-links-block{
-            margin-top:60px;
-            text-align:center;
-        }
-
-        .register-btn{
-            display:inline-block;
-            background:#2d6bff;
-            color:#fff;
-            padding:18px 55px;
-            border-radius:40px;
-            font-size:18px;
-            font-weight:700;
-            transition:0.3s;
-        }
-
-        .register-btn:hover{
-            background:#0f56ff;
-            transform:translateY(-2px);
-        }
-
-        /* ========================================
-                    CONTACT SECTION
-        ======================================== */
-
-        .contact-section{
-            padding:40px 20px 60px;
-            background:#f5f6fb;
-        }
-
-        .contact-container{
-            max-width:1200px;
-            margin:auto;
-        }
-
-        .contact-info{
-            width:100%;
-            background:#eef0f6;
-            border-radius:24px;
-            padding:55px 40px;
-            text-align:center;
-        }
-
-        .contact-info h3{
-            font-size:42px;
-            font-weight:800;
-            color:#1d3565;
-            margin-bottom:35px;
-        }
-
-        .contact-details{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            gap:90px;
-            flex-wrap:wrap;
-        }
-
-        .contact-item{
-            font-size:28px;
-            color:#666;
-            font-weight:500;
-        }
-
-        .contact-item strong{
-            color:#08a39b;
-            margin-right:8px;
-        }
-
-        /* ========================================
-                        LOGOS
-        ======================================== */
-
-        .logos{
-            text-align:center;
-            background:#fff;
-            padding:40px 20px;
-        }
-
-        .logos img{
-            width:180px;
-        }
-
-        /* ========================================
-                        FOOTER
-        ======================================== */
-
-        footer{
-            background:#091634;
-            color:#fff;
-            text-align:center;
-            padding:28px;
-            font-size:16px;
-        }
-
-        /* ========================================
-                    RESPONSIVE
-        ======================================== */
-
-        @media(max-width:900px){
-
-            .logo-container{
-                flex-direction:column;
-                gap:20px;
-            }
-
-            .header-nav ul{
-                flex-wrap:wrap;
-                justify-content:center;
-                gap:15px;
-            }
-
-            .hero-title{
-                font-size:30px;
-            }
-
-            .contact-details{
-                flex-direction:column;
-                gap:25px;
-            }
-
-            .contact-item{
-                font-size:22px;
-            }
-
-            .contact-info h3{
-                font-size:32px;
-            }
-
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/registration.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-
-    <!-- ========================================
-                        HEADER
-    ======================================== -->
-
+    <!-- Logo Header with Navigation and Conference Title -->
     <section class="logo-header">
-
         <div class="logo-container">
-
-            <img
-                src="images/au-logo-1.png"
-                alt="GPREC Logo"
-                class="header-logo"
-            >
-
+            <img src="images/au-logo-1.png" alt="GPREC Logo" class="header-logo" />
             <div class="logo-text">
-
-                <h1>
-                    GPREC
-                    <span class="conference-cross">×</span>
-                    ICSIGT 2026
-                </h1>
-
+                <h1>GPREC <span class="conference-cross">×</span> ICSIGT 2026</h1>
             </div>
-
             <nav class="header-nav">
-
                 <ul>
-
-                    <li>
-                        <a href="index.html">HOME</a>
-                    </li>
-
-                    <li>
-                        <a href="committees.html">COMMITTEES</a>
-                    </li>
-
-                    <li>
-                        <a href="speakers.html">
-                            KEYNOTE SPEAKERS
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="call_for_papers.html">
-                            CALL FOR PAPERS
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="dates.html">
-                            IMPORTANT DATES
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="registration.html"
-                           class="active">
-                            REGISTRATION
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="contact.html">
-                            CONTACT
-                        </a>
-                    </li>
-
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="committees.html">COMMITTEES</a></li>
+                    <li><a href="speakers.html">Keynote Speakers</a></li>
+                    <li><a href="call_for_papers.html">CALL FOR PAPERS</a></li>
+                    <li><a href="dates.html">IMPORTANT DATES</a></li>
+                    <li><a href="registration.html" class="active">REGISTRATION</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
                 </ul>
-
             </nav>
-
         </div>
-
     </section>
 
+ <section class="hero">
+    <div class="hero-logo-section">
+      <img src="images/logo_main.png" alt="Hero Logo" class="hero-logo" />
+    </div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <h2 style="
+  font-family: Poppins, Segoe UI, Arial, sans-serif;
+  font-size: 2.4rem; /* increased */
+  font-weight: 600;
+  line-height: 1.35;
+  color: #ffffff;
+  text-align: center;
+">
+  <span style="
+    font-size: 2.8rem; /* increased */
+    font-weight: 700;
+    color: #ffffff;
+    margin-right: 0;
+    white-space: nowrap;
+  ">1<sup style="
+      font-size: 60%;
+      vertical-align: super;
+      font-weight: 600;
+  ">st</sup></span> International Conference on Sustainable Infrastructure and Geospatial Technologies
+</h2>
 
-    <!-- ========================================
-                        HERO
-    ======================================== -->
+        <h4><span class="highlight">ICSIGT - 2026</span></h4>
+        <p>06 – 07 October 2026, GPREC, Kurnool, India (<span class="highlight">Online Mode</span>)</p>
+      </div>
+    </div>
+  </section>
 
-    <section class="hero">
 
-        <div class="hero-logo-section">
+<!-- Registration Section -->
+<section class="registration">
+    <div class="container">
 
-            <img
-                src="images/logo_main.png"
-                alt="Conference Logo"
-                class="hero-logo"
-            >
+        <!-- Important Dates -->
+        <section class="card" aria-labelledby="regDatesTitle" style="margin-top:16px;">
+            <div class="card-head" id="regDatesTitle">Important Dates</div>
 
-        </div>
+            <div class="table-wrap" role="region" aria-label="Important Dates" tabindex="0">
+                <table class="dates-table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
 
-        <div class="hero-container">
+                    <tbody>
+                        <tr>
+                            <td>Abstract Submission</td>
+                            <td>15 May 2026</td>
+                        </tr>
 
-            <div class="hero-content">
+                        <tr>
+                            <td>Abstract Acceptance</td>
+                            <td>15 June 2026</td>
+                        </tr>
 
-                <h2 class="hero-title">
+                        <tr>
+                            <td>Full Paper Submission</td>
+                            <td>15 August 2026</td>
+                        </tr>
 
-                    <span class="hero-count">
-                        1<sup>st</sup>
-                    </span>
+                        <tr>
+                            <td>Full Paper Acceptance</td>
+                            <td>15 September 2026</td>
+                        </tr>
 
-                    International Conference on
-                    Sustainable Infrastructure and
-                    Geospatial Technologies
-
-                </h2>
-
-                <h4>
-
-                    <span class="highlight">
-                        ICSIGT - 2026
-                    </span>
-
-                </h4>
-
-                <p>
-
-                    06 – 07 October 2026,
-                    GPREC, Kurnool, India
-                    (<span class="highlight">Online Mode</span>)
-
-                </p>
-
+                        <tr>
+                            <td>Conference Dates</td>
+                            <td>06 – 07 October 2026</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </section>
 
+        <!-- Registration Heading -->
+        <h1 class="section-title">Registration</h1>
+
+        <p class="section-subtitle">
+            Fee structure and payment details for Indian and International authors.
+        </p>
+
+        <!-- Fees Table -->
+        <div class="card">
+            <div class="card-head">Author Categories and Fees</div>
+
+            <div class="table-wrap" role="region" aria-labelledby="feeTableTitle" tabindex="0">
+                <table class="fee-table fees-alt">
+
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Authors Category</th>
+
+                            <th colspan="2">Indian (Virtual Mode)</th>
+
+                            <th colspan="2">Indian (Physical Mode)</th>
+
+                            <th colspan="2">Foreign</th>
+                        </tr>
+
+                        <tr>
+                            <th>Early Bird</th>
+                            <th>Late Fee</th>
+
+                            <th>Early Bird</th>
+                            <th>Late Fee</th>
+
+                            <th>Early Bird</th>
+                            <th>Late Fee</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Academic Institutions / Research Scholars / P.G. Students</td>
+
+                            <td><span class="amount">Rs 7500</span></td>
+                            <td><span class="amount">Rs 8500</span></td>
+
+                            <td><span class="amount">Rs 8500</span></td>
+                            <td><span class="amount">Rs 9500</span></td>
+
+                            <td><span class="amount">$ 120</span></td>
+                            <td><span class="amount">$ 150</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Industry</td>
+
+                            <td><span class="amount">Rs 8000</span></td>
+                            <td><span class="amount">Rs 9000</span></td>
+
+                            <td><span class="amount">Rs 9000</span></td>
+                            <td><span class="amount">Rs 10000</span></td>
+
+                            <td><span class="amount">$ 150</span></td>
+                            <td><span class="amount">$ 200</span></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
         </div>
 
-    </section>
+        <!-- Payment Details -->
+        <section class="payment-split" aria-labelledby="paymentSplitTitle">
 
+            <h2 id="paymentSplitTitle" class="block-title">
+                Conference Registration Fee Payment Details
+            </h2>
 
-    <!-- ========================================
-                    REGISTRATION
-    ======================================== -->
-
-    <section class="registration">
-
-        <div class="container">
-
-            <!-- IMPORTANT DATES -->
-
-            <section class="card">
-
-                <div class="card-head">
-                    Important Dates
-                </div>
-
-                <div class="table-wrap">
-
-                    <table>
-
-                        <thead>
-
-                            <tr>
-                                <th>Event</th>
-                                <th>Date</th>
-                            </tr>
-
-                        </thead>
-
-                        <tbody>
-
-                            <tr>
-                                <td>Abstract Submission</td>
-                                <td>15 May 2026</td>
-                            </tr>
-
-                            <tr>
-                                <td>Abstract Acceptance</td>
-                                <td>15 June 2026</td>
-                            </tr>
-
-                            <tr>
-                                <td>Full Paper Submission</td>
-                                <td>15 August 2026</td>
-                            </tr>
-
-                            <tr>
-                                <td>Full Paper Acceptance</td>
-                                <td>15 September 2026</td>
-                            </tr>
-
-                            <tr>
-                                <td>Conference Dates</td>
-                                <td>06 – 07 October 2026</td>
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </section>
-
-
-            <!-- PAGE TITLE -->
-
-            <h1 class="section-title">
-                Registration
-            </h1>
-
-            <p class="section-subtitle">
-
-                Fee structure and payment details
-                for Indian and International authors.
-
-            </p>
-
-
-            <!-- REGISTRATION FEES -->
-
-            <section class="card">
-
-                <div class="card-head">
-                    Author Categories and Fees
-                </div>
-
-                <div class="table-wrap">
-
-                    <table>
-
-                        <thead>
-
-                            <tr>
-
-                                <th rowspan="2">
-                                    Authors Category
-                                </th>
-
-                                <th colspan="2">
-                                    Indian (Virtual Mode)
-                                </th>
-
-                                <th colspan="2">
-                                    Indian (Physical Mode)
-                                </th>
-
-                                <th colspan="2">
-                                    Foreign
-                                </th>
-
-                            </tr>
-
-                            <tr>
-
-                                <th>Early Bird</th>
-                                <th>Late Fee</th>
-
-                                <th>Early Bird</th>
-                                <th>Late Fee</th>
-
-                                <th>Early Bird</th>
-                                <th>Late Fee</th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody>
-
-                            <tr>
-
-                                <td>
-                                    Academic Institutions /
-                                    Research Scholars /
-                                    P.G. Students
-                                </td>
-
-                                <td>₹7500</td>
-                                <td>₹8500</td>
-
-                                <td>₹8500</td>
-                                <td>₹9500</td>
-
-                                <td>$120</td>
-                                <td>$150</td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td>Industry</td>
-
-                                <td>₹8000</td>
-                                <td>₹9000</td>
-
-                                <td>₹9000</td>
-                                <td>₹10000</td>
-
-                                <td>$150</td>
-                                <td>$200</td>
-
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </section>
-
-
-            <!-- PAYMENT DETAILS -->
-
-            <section class="payment-split">
-
-                <h2 class="block-title">
-
-                    Conference Registration Fee
-                    Payment Details
-
-                </h2>
+            <div class="pay-grid">
 
                 <div class="pay-card">
 
-                    <div class="pay-head">
-                        Indian Authors
-                    </div>
+                    <div class="pay-head">Indian Authors</div>
 
                     <table class="kv-table">
 
                         <tbody>
-
                             <tr>
                                 <th>Account Name</th>
-                                <td>
-                                    Account Name details to be updated
-                                </td>
+                                <td>Available Soon</td>
                             </tr>
 
                             <tr>
                                 <th>Account Number</th>
-                                <td>
-                                    Account Number details to be updated
-                                </td>
+                                <td>Available Soon</td>
                             </tr>
 
                             <tr>
                                 <th>Bank Name</th>
-                                <td>
-                                    Bank Name details to be updated
-                                </td>
+                                <td>Available Soon</td>
                             </tr>
 
                             <tr>
                                 <th>Branch Name</th>
-                                <td>
-                                    Branch Name details to be updated
-                                </td>
+                                <td>Available Soon</td>
                             </tr>
 
                             <tr>
                                 <th>IFSC Code</th>
-                                <td>
-                                    IFSC Code details to be updated
-                                </td>
+                                <td>Available Soon</td>
                             </tr>
 
                             <tr>
                                 <th>Swift Code</th>
-                                <td>
-                                    Swift Code details to be updated
-                                </td>
+                                <td>Available Soon</td>
                             </tr>
 
                             <tr>
                                 <th>Institute Address</th>
-                                <td>
-                                    Institute Address details to be updated
-                                </td>
+                                <td>Available Soon</td>
                             </tr>
 
                             <tr>
                                 <th>Payment Remark</th>
-                                <td>Paper ID</td>
+                                <td>ICSIGT_Paper ID</td>
                             </tr>
-
                         </tbody>
 
                     </table>
 
-
-                    <!-- QR -->
-
-                    <div class="scan-pay">
-
-                        <h3 class="scan-title">
-                            Scan & Pay (UPI)
-                        </h3>
-
-                        <img
-                            src="images/au_qr.png"
-                            alt="UPI QR"
-                            class="qr-image"
-                        >
-
-                        <div class="upi-meta">
-
-                            <p>
-
-                                <strong>Merchant:</strong>
-
-                                Merchant details to be updated
-
-                            </p>
-
-                            <p>
-
-                                <strong>UPI ID:</strong>
-
-                                UPI ID details to be updated
-
-                            </p>
-
-                            <p class="pay-note">
-
-                                Use any UPI app and enter
-                                Paper ID in remarks.
-
-                            </p>
-
-                        </div>
-
+                    <div class="pay-note">
+                        Payment details will be updated soon.
                     </div>
 
                 </div>
+            </div>
+        </section>
 
-            </section>
+        <!-- Registration Button -->
+        <section class="reg-links-block single-link" aria-labelledby="regLinkTitle">
 
+            <h2 id="regLinkTitle" class="block-title">
+                Registration Link
+            </h2>
 
-            <!-- REGISTER BUTTON -->
+            <div class="reg-link-card">
 
-            <section class="reg-links-block">
+                <a href="#"
+                    class="register-btn">
 
-                <a
-                    href="index.html"
-                    class="register-btn"
-                >
-                    Register Now
+                    Click here to register
+
                 </a>
 
-            </section>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================================
-                    CONTACT SECTION
-    ======================================== -->
-
-    <section class="contact-section">
-
-        <div class="contact-container">
-
-            <div class="contact-info">
-
-                <h3>
-                    Questions? Contact Us
-                </h3>
-
-                <div class="contact-details">
-
-                    <div class="contact-item">
-
-                        <strong>
-                            Sri. M. Santosh Kumar
-                        </strong>
-
-                        <span>9494435793</span>
-
-                    </div>
-
-                    <div class="contact-item">
-
-                        <strong>
-                            Dr. E. Ganesh
-                        </strong>
-
-                        <span>8919757368</span>
-
-                    </div>
-
-                </div>
-
             </div>
+        </section>
 
-        </div>
+    </div>
+</section>
 
+    
+
+    
+<section>
+            <div class="contact-info">
+                <h3>Questions? Contact Us</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <strong>Sri. M. Santosh Kumar</strong> 9494435793
+                    </div>
+                    <div class="contact-item">
+                        <strong>Dr. E. Ganesh</strong> 8919757368
+                    </div>
+                </div>
+            </div>
     </section>
 
 
-    <!-- ========================================
-                        LOGOS
-    ======================================== -->
-
+    <!-- Logos Section -->
     <section class="logos">
-
-        <img
-            src="images/logo.png"
-            alt="GPREC Logo"
-        >
-
+        <img src="images/logo.png" alt="GPREC" />
     </section>
-
-
-    <!-- ========================================
-                        FOOTER
-    ======================================== -->
 
     <footer>
-
-        <p>
-            © 2026 GPREC.
-            All Rights Reserved.
-        </p>
-
+        <p>&copy; 2026 GPREC. All Rights Reserved.</p>
     </footer>
 
 </body>
