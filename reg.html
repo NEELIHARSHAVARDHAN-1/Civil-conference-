@@ -3,30 +3,435 @@
 
 <head>
 
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
 
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0" />
+          content="width=device-width, initial-scale=1.0">
 
     <title>Registration - ICSIGT 2026</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/reg.css" />
-
-    <!-- Google Fonts -->
+    <!-- Google Font -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet"
-    />
+    >
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#f5f6fb;
+            color:#222;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        img{
+            max-width:100%;
+        }
+
+        /* ========================================
+                        HEADER
+        ======================================== */
+
+        .logo-header{
+            width:100%;
+            background:#ffffff;
+            box-shadow:0 2px 10px rgba(0,0,0,0.05);
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
+
+        .logo-container{
+            max-width:1400px;
+            margin:auto;
+            padding:18px 30px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .header-logo{
+            width:60px;
+        }
+
+        .logo-text h1{
+            font-size:24px;
+            font-weight:800;
+            color:#0d1b4c;
+        }
+
+        .conference-cross{
+            color:#2d6bff;
+        }
+
+        .header-nav ul{
+            display:flex;
+            gap:35px;
+            list-style:none;
+            align-items:center;
+        }
+
+        .header-nav a{
+            color:#1d1d1d;
+            font-size:14px;
+            font-weight:700;
+        }
+
+        .header-nav a.active{
+            background:#2d6bff;
+            color:#fff;
+            padding:12px 22px;
+            border-radius:30px;
+        }
+
+        /* ========================================
+                        HERO
+        ======================================== */
+
+        .hero{
+            padding:70px 20px 40px;
+            text-align:center;
+            background:linear-gradient(
+                to bottom,
+                #f7f8fd,
+                #f3f4f9
+            );
+        }
+
+        .hero-logo{
+            width:120px;
+            margin-bottom:25px;
+        }
+
+        .hero-title{
+            max-width:1000px;
+            margin:auto;
+            font-size:42px;
+            line-height:1.4;
+            font-weight:800;
+            color:#0d1b4c;
+        }
+
+        .hero-count{
+            color:#2d6bff;
+        }
+
+        .hero h4{
+            margin-top:18px;
+            font-size:30px;
+        }
+
+        .highlight{
+            color:#2d6bff;
+        }
+
+        .hero p{
+            margin-top:15px;
+            font-size:18px;
+            color:#666;
+        }
+
+        /* ========================================
+                    MAIN CONTAINER
+        ======================================== */
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+            padding:40px 20px 80px;
+        }
+
+        .section-title{
+            text-align:center;
+            font-size:42px;
+            font-weight:800;
+            color:#13244d;
+            margin-bottom:10px;
+        }
+
+        .section-subtitle{
+            text-align:center;
+            color:#666;
+            margin-bottom:40px;
+            font-size:17px;
+        }
+
+        /* ========================================
+                        CARDS
+        ======================================== */
+
+        .card{
+            background:#ffffff;
+            border-radius:22px;
+            overflow:hidden;
+            margin-bottom:40px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .card-head{
+            background:#2d6bff;
+            color:#fff;
+            text-align:center;
+            padding:20px;
+            font-size:24px;
+            font-weight:700;
+        }
+
+        .table-wrap{
+            overflow-x:auto;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        table th{
+            background:#edf2ff;
+            color:#13244d;
+            font-size:15px;
+            padding:16px;
+            border:1px solid #dde5ff;
+        }
+
+        table td{
+            padding:16px;
+            border:1px solid #ececec;
+            text-align:center;
+            font-size:15px;
+        }
+
+        tbody tr:nth-child(even){
+            background:#fafcff;
+        }
+
+        /* ========================================
+                    PAYMENT SECTION
+        ======================================== */
+
+        .block-title{
+            text-align:center;
+            font-size:34px;
+            font-weight:800;
+            color:#13244d;
+            margin-bottom:35px;
+        }
+
+        .pay-card{
+            background:#ffffff;
+            border-radius:22px;
+            padding:40px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .pay-head{
+            text-align:center;
+            color:#2d6bff;
+            font-size:28px;
+            font-weight:800;
+            margin-bottom:30px;
+        }
+
+        .kv-table th{
+            width:35%;
+            text-align:left;
+        }
+
+        .kv-table td{
+            text-align:left;
+        }
+
+        /* ========================================
+                        QR
+        ======================================== */
+
+        .scan-pay{
+            margin-top:45px;
+            text-align:center;
+        }
+
+        .scan-title{
+            font-size:28px;
+            font-weight:700;
+            color:#13244d;
+            margin-bottom:20px;
+        }
+
+        .qr-image{
+            width:240px;
+            background:#fff;
+            padding:15px;
+            border-radius:18px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .upi-meta{
+            margin-top:20px;
+        }
+
+        .upi-meta p{
+            margin:10px 0;
+            font-size:16px;
+        }
+
+        .pay-note{
+            color:#666;
+        }
+
+        /* ========================================
+                REGISTRATION BUTTON
+        ======================================== */
+
+        .reg-links-block{
+            margin-top:60px;
+            text-align:center;
+        }
+
+        .register-btn{
+            display:inline-block;
+            background:#2d6bff;
+            color:#fff;
+            padding:18px 55px;
+            border-radius:40px;
+            font-size:18px;
+            font-weight:700;
+            transition:0.3s;
+        }
+
+        .register-btn:hover{
+            background:#0f56ff;
+            transform:translateY(-2px);
+        }
+
+        /* ========================================
+                    CONTACT SECTION
+        ======================================== */
+
+        .contact-section{
+            padding:40px 20px 60px;
+            background:#f5f6fb;
+        }
+
+        .contact-container{
+            max-width:1200px;
+            margin:auto;
+        }
+
+        .contact-info{
+            width:100%;
+            background:#eef0f6;
+            border-radius:24px;
+            padding:55px 40px;
+            text-align:center;
+        }
+
+        .contact-info h3{
+            font-size:42px;
+            font-weight:800;
+            color:#1d3565;
+            margin-bottom:35px;
+        }
+
+        .contact-details{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:90px;
+            flex-wrap:wrap;
+        }
+
+        .contact-item{
+            font-size:28px;
+            color:#666;
+            font-weight:500;
+        }
+
+        .contact-item strong{
+            color:#08a39b;
+            margin-right:8px;
+        }
+
+        /* ========================================
+                        LOGOS
+        ======================================== */
+
+        .logos{
+            text-align:center;
+            background:#fff;
+            padding:40px 20px;
+        }
+
+        .logos img{
+            width:180px;
+        }
+
+        /* ========================================
+                        FOOTER
+        ======================================== */
+
+        footer{
+            background:#091634;
+            color:#fff;
+            text-align:center;
+            padding:28px;
+            font-size:16px;
+        }
+
+        /* ========================================
+                    RESPONSIVE
+        ======================================== */
+
+        @media(max-width:900px){
+
+            .logo-container{
+                flex-direction:column;
+                gap:20px;
+            }
+
+            .header-nav ul{
+                flex-wrap:wrap;
+                justify-content:center;
+                gap:15px;
+            }
+
+            .hero-title{
+                font-size:30px;
+            }
+
+            .contact-details{
+                flex-direction:column;
+                gap:25px;
+            }
+
+            .contact-item{
+                font-size:22px;
+            }
+
+            .contact-info h3{
+                font-size:32px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
 <body>
 
     <!-- ========================================
-                    HEADER
-    ========================================= -->
+                        HEADER
+    ======================================== -->
 
     <section class="logo-header">
 
@@ -36,7 +441,7 @@
                 src="images/au-logo-1.png"
                 alt="GPREC Logo"
                 class="header-logo"
-            />
+            >
 
             <div class="logo-text">
 
@@ -53,15 +458,11 @@
                 <ul>
 
                     <li>
-                        <a href="index.html">
-                            HOME
-                        </a>
+                        <a href="index.html">HOME</a>
                     </li>
 
                     <li>
-                        <a href="committees.html">
-                            COMMITTEES
-                        </a>
+                        <a href="committees.html">COMMITTEES</a>
                     </li>
 
                     <li>
@@ -105,8 +506,8 @@
 
 
     <!-- ========================================
-                    HERO SECTION
-    ========================================= -->
+                        HERO
+    ======================================== -->
 
     <section class="hero">
 
@@ -116,7 +517,7 @@
                 src="images/logo_main.png"
                 alt="Conference Logo"
                 class="hero-logo"
-            />
+            >
 
         </div>
 
@@ -145,9 +546,11 @@
                 </h4>
 
                 <p>
+
                     06 – 07 October 2026,
                     GPREC, Kurnool, India
                     (<span class="highlight">Online Mode</span>)
+
                 </p>
 
             </div>
@@ -158,31 +561,24 @@
 
 
     <!-- ========================================
-                REGISTRATION SECTION
-    ========================================= -->
+                    REGISTRATION
+    ======================================== -->
 
     <section class="registration">
 
         <div class="container">
 
+            <!-- IMPORTANT DATES -->
 
-            <!-- ========================================
-                    IMPORTANT DATES
-            ========================================= -->
+            <section class="card">
 
-            <section class="card"
-                     aria-labelledby="regDatesTitle">
-
-                <div class="card-head"
-                     id="regDatesTitle">
-
+                <div class="card-head">
                     Important Dates
-
                 </div>
 
                 <div class="table-wrap">
 
-                    <table class="dates-table">
+                    <table>
 
                         <thead>
 
@@ -229,9 +625,7 @@
             </section>
 
 
-            <!-- ========================================
-                    PAGE TITLE
-            ========================================= -->
+            <!-- PAGE TITLE -->
 
             <h1 class="section-title">
                 Registration
@@ -245,9 +639,7 @@
             </p>
 
 
-            <!-- ========================================
-                    REGISTRATION FEES
-            ========================================= -->
+            <!-- REGISTRATION FEES -->
 
             <section class="card">
 
@@ -257,7 +649,7 @@
 
                 <div class="table-wrap">
 
-                    <table class="fee-table fees-alt">
+                    <table>
 
                         <thead>
 
@@ -341,129 +733,124 @@
             </section>
 
 
-            <!-- ========================================
-                    PAYMENT DETAILS
-            ========================================= -->
+            <!-- PAYMENT DETAILS -->
 
             <section class="payment-split">
 
                 <h2 class="block-title">
+
                     Conference Registration Fee
                     Payment Details
+
                 </h2>
 
-                <div class="pay-grid">
+                <div class="pay-card">
 
-                    <div class="pay-card">
+                    <div class="pay-head">
+                        Indian Authors
+                    </div>
 
-                        <div class="pay-head">
-                            Indian Authors
-                        </div>
+                    <table class="kv-table">
 
-                        <table class="kv-table">
+                        <tbody>
 
-                            <tbody>
+                            <tr>
+                                <th>Account Name</th>
+                                <td>
+                                    Account Name details to be updated
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <th>Account Name</th>
-                                    <td>
-                                        Account Name details to be updated
-                                    </td>
-                                </tr>
+                            <tr>
+                                <th>Account Number</th>
+                                <td>
+                                    Account Number details to be updated
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <th>Account Number</th>
-                                    <td>
-                                        Account Number details to be updated
-                                    </td>
-                                </tr>
+                            <tr>
+                                <th>Bank Name</th>
+                                <td>
+                                    Bank Name details to be updated
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <th>Bank Name</th>
-                                    <td>
-                                        Bank Name details to be updated
-                                    </td>
-                                </tr>
+                            <tr>
+                                <th>Branch Name</th>
+                                <td>
+                                    Branch Name details to be updated
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <th>Branch Name</th>
-                                    <td>
-                                        Branch Name details to be updated
-                                    </td>
-                                </tr>
+                            <tr>
+                                <th>IFSC Code</th>
+                                <td>
+                                    IFSC Code details to be updated
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <th>IFSC Code</th>
-                                    <td>
-                                        IFSC Code details to be updated
-                                    </td>
-                                </tr>
+                            <tr>
+                                <th>Swift Code</th>
+                                <td>
+                                    Swift Code details to be updated
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <th>Swift Code</th>
-                                    <td>
-                                        Swift Code details to be updated
-                                    </td>
-                                </tr>
+                            <tr>
+                                <th>Institute Address</th>
+                                <td>
+                                    Institute Address details to be updated
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <th>Institute Address</th>
+                            <tr>
+                                <th>Payment Remark</th>
+                                <td>Paper ID</td>
+                            </tr>
 
-                                    <td>
-                                        Institute Address details to be updated
-                                    </td>
-                                </tr>
+                        </tbody>
 
-                                <tr>
-                                    <th>Payment Remark</th>
-                                    <td>Paper ID</td>
-                                </tr>
-
-                            </tbody>
-
-                        </table>
+                    </table>
 
 
-                        <!-- ========================================
-                                QR PAYMENT
-                        ========================================= -->
+                    <!-- QR -->
 
-                        <div class="scan-pay">
+                    <div class="scan-pay">
 
-                            <h3 class="scan-title">
-                                Scan & Pay (UPI)
-                            </h3>
+                        <h3 class="scan-title">
+                            Scan & Pay (UPI)
+                        </h3>
 
-                            <div class="qr-wrap">
+                        <img
+                            src="images/au_qr.png"
+                            alt="UPI QR"
+                            class="qr-image"
+                        >
 
-                                <img
-                                    src="images/au_qr.png"
-                                    alt="UPI QR"
-                                    class="qr-image"
-                                />
+                        <div class="upi-meta">
 
-                            </div>
+                            <p>
 
-                            <div class="upi-meta">
+                                <strong>Merchant:</strong>
 
-                                <p>
-                                    <strong>Merchant:</strong>
-                                    Merchant details to be updated
-                                </p>
+                                Merchant details to be updated
 
-                                <p>
-                                    <strong>UPI ID:</strong>
-                                    UPI ID details to be updated
-                                </p>
+                            </p>
 
-                                <p class="pay-note">
+                            <p>
 
-                                    Use any UPI app and enter
-                                    Paper ID in remarks.
+                                <strong>UPI ID:</strong>
 
-                                </p>
+                                UPI ID details to be updated
 
-                            </div>
+                            </p>
+
+                            <p class="pay-note">
+
+                                Use any UPI app and enter
+                                Paper ID in remarks.
+
+                            </p>
 
                         </div>
 
@@ -474,27 +861,16 @@
             </section>
 
 
-            <!-- ========================================
-                    REGISTRATION BUTTON
-            ========================================= -->
+            <!-- REGISTER BUTTON -->
 
             <section class="reg-links-block">
 
-                <h2 class="block-title">
-                    Registration Link
-                </h2>
-
-                <div class="reg-link-card"
-                     style="text-align:center;">
-
-                    <a
-                        href="index.html"
-                        class="register-btn"
-                    >
-                        Register Now
-                    </a>
-
-                </div>
+                <a
+                    href="index.html"
+                    class="register-btn"
+                >
+                    Register Now
+                </a>
 
             </section>
 
@@ -504,36 +880,40 @@
 
 
     <!-- ========================================
-                    CONTACT
-    ========================================= -->
+                    CONTACT SECTION
+    ======================================== -->
 
     <section class="contact-section">
 
-        <div class="contact-info">
+        <div class="contact-container">
 
-            <h3>
-                Questions? Contact Us
-            </h3>
+            <div class="contact-info">
 
-            <div class="contact-details">
+                <h3>
+                    Questions? Contact Us
+                </h3>
 
-                <div class="contact-item">
+                <div class="contact-details">
 
-                    <strong>
-                        Sri. M. Santosh Kumar
-                    </strong>
+                    <div class="contact-item">
 
-                    9494435793
+                        <strong>
+                            Sri. M. Santosh Kumar
+                        </strong>
 
-                </div>
+                        <span>9494435793</span>
 
-                <div class="contact-item">
+                    </div>
 
-                    <strong>
-                        Dr. E. Ganesh
-                    </strong>
+                    <div class="contact-item">
 
-                    8919757368
+                        <strong>
+                            Dr. E. Ganesh
+                        </strong>
+
+                        <span>8919757368</span>
+
+                    </div>
 
                 </div>
 
@@ -545,27 +925,27 @@
 
 
     <!-- ========================================
-                    LOGOS
-    ========================================= -->
+                        LOGOS
+    ======================================== -->
 
     <section class="logos">
 
         <img
             src="images/logo.png"
             alt="GPREC Logo"
-        />
+        >
 
     </section>
 
 
     <!-- ========================================
-                    FOOTER
-    ========================================= -->
+                        FOOTER
+    ======================================== -->
 
     <footer>
 
         <p>
-            &copy; 2026 GPREC.
+            © 2026 GPREC.
             All Rights Reserved.
         </p>
 
